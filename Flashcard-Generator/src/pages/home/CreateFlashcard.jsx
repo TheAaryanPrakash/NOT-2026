@@ -28,6 +28,7 @@ const CreateFlashcard = () => {
     <FlashcardForm
       initialValues={emptyValues}
       submitLabel="Create Flashcard"
+      enableAiGenerate
       onSubmit={(values) => createFlashcardGroup(values)}
     />
   );

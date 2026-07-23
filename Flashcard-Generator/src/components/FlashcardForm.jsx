@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CreateGroup from "./CreateGroup";
 import CreateTerm from "./CreateTerm";
+import AiGenerator from "./AiGenerator";
 import { Formik, Form } from "formik";
 import Button from "./ui/button/Button";
 import { flashcardSchema } from "../schema/validation";
@@ -14,6 +15,7 @@ const FlashcardForm = ({
   onSubmit,
   submitLabel,
   resetOnSuccess = true,
+  enableAiGenerate = false,
 }) => {
   const [toast, setToast] = useState(false);
   const [formError, setFormError] = useState("");
@@ -53,6 +55,10 @@ const FlashcardForm = ({
 
             {formError && (
               <p className="text-red-600 font-semibold">{formError}</p>
+            )}
+
+            {enableAiGenerate && (
+              <AiGenerator setFieldValue={setFieldValue} />
             )}
 
             <CreateGroup values={values} setFieldValue={setFieldValue} />
