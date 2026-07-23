@@ -13,8 +13,8 @@ Deploy the AI Edge Function via **Supabase Dashboard → Edge Functions**:
 
 - Create a function named `generate-flashcards`, paste in
   `supabase/functions/generate-flashcards/index.ts`, deploy.
-- Under the function's **Secrets**, set `GEMINI_API_KEY` to your key from
-  aistudio.google.com/apikey.
+- Under the function's **Secrets**, set `GROQ_API_KEY` to your key from
+  console.groq.com/keys (free tier, no billing required).
 
 ## Frontend (Vercel)
 
