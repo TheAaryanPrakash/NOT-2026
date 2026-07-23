@@ -7,10 +7,6 @@ publicly with a read-only link.
 
 **Live app:** https://notes-on-time.vercel.app/
 
-> This started as a university full-stack project. The original React
-> frontend has been kept, but the entire backend has since been rebuilt on
-> Supabase — see [History](#history) below.
-
 ## Features
 
 - **Auth** — email/password signup and login (Supabase Auth) with protected
@@ -140,13 +136,3 @@ The app is deployed on Vercel with the **Root Directory** set to
 `Flashcard-Generator`, since the app doesn't live at the repo root. See
 [`Flashcard-Generator/DEPLOY.md`](Flashcard-Generator/DEPLOY.md) for the full
 Vercel + Supabase deployment guide.
-
-## History
-
-This repo began as a university group full-stack web development project. It
-has since been rebuilt from that starting point: the original React frontend
-was kept, but the backend was replaced entirely — moving from the original
-course-provided backend to Supabase (Postgres + Auth + Storage + Edge
-Functions), swapping Redux for React Query, and adding AI-powered flashcard
-generation (originally built against Gemini, since switched to Groq), quiz
-mode, and public sharing.
