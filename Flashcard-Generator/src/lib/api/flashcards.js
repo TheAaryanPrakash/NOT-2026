@@ -131,3 +131,26 @@ export const deleteFlashcardGroup = async (groupId) => {
 
   if (error) throw error;
 };
+
+export const setFlashcardGroupVisibility = async (groupId, isPublic) => {
+  const { error } = await supabase
+    .from("flashcard_groups")
+    .update({ is_public: isPublic })
+    .eq("id", groupId);
+
+  if (error) throw error;
+};
+
+// Public, no-login read of a shared group. Relies on RLS: only resolves
+// when the group's owner has marked it public.
+export const fetchPublicFlashcardGroup = async (groupId) => {
+  const { data, error } = await supabase
+    .from("flashcard_groups")
+    .select(GROUP_WITH_TERMS_SELECT)
+    .eq("id", groupId)
+    .eq("is_public", true)
+    .single();
+
+  if (error) throw error;
+  return sortTerms(data);
+};

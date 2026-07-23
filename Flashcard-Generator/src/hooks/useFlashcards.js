@@ -5,6 +5,8 @@ import {
   deleteFlashcardGroup,
   fetchFlashcardGroup,
   fetchFlashcardGroups,
+  fetchPublicFlashcardGroup,
+  setFlashcardGroupVisibility,
   updateFlashcardGroup,
 } from "../lib/api/flashcards";
 
@@ -61,6 +63,28 @@ export const useDeleteFlashcardGroup = () => {
   return useMutation({
     mutationFn: (groupId) => deleteFlashcardGroup(groupId),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: groupsKey(user.id) });
+    },
+  });
+};
+
+export const usePublicFlashcardGroup = (groupId) => {
+  return useQuery({
+    queryKey: ["publicFlashcardGroup", groupId],
+    queryFn: () => fetchPublicFlashcardGroup(groupId),
+    enabled: !!groupId,
+    retry: false,
+  });
+};
+
+export const useSetFlashcardGroupVisibility = (groupId) => {
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (isPublic) => setFlashcardGroupVisibility(groupId, isPublic),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: groupKey(groupId) });
       queryClient.invalidateQueries({ queryKey: groupsKey(user.id) });
     },
   });

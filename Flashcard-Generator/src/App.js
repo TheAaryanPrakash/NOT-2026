@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Landing from "./pages/landing/Landing";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import SharedFlashcard from "./pages/SharedFlashcard";
 import NotFound from "./pages/errors/NotFound";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import PublicOnlyRoute from "./routes/PublicOnlyRoute";
@@ -14,6 +15,7 @@ function App() {
       <div data-testid="appDiv">
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/share/:id" element={<SharedFlashcard />} />
           <Route
             path="/login"
             element={
