@@ -40,9 +40,21 @@ const AiGenerator = ({ setFieldValue }) => {
         { body: { text: notes } }
       );
 
-      // supabase-js only rejects on network failure; app-level errors (4xx/5xx)
-      // come back as a normal payload with an `error` field.
-      if (fnError) throw fnError;
+      // On a non-2xx response, supabase-js's error.message is just a generic
+      // "non-2xx status code" wrapper — the real reason is in the response
+      // body, reachable via error.context (the raw Response object).
+      if (fnError) {
+        let message = fnError.message;
+        if (fnError.context?.json) {
+          try {
+            const body = await fnError.context.json();
+            if (body?.error) message = body.error;
+          } catch {
+            // response body wasn't JSON; fall back to the generic message
+          }
+        }
+        throw new Error(message);
+      }
       if (data?.error) throw new Error(data.error);
 
       setFieldValue("groups.group", data.group || "");
