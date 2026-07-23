@@ -16,9 +16,11 @@ const Landing = () => {
           <NavLink to="/">
             <img src={fullMoon} alt="Logo" />
           </NavLink>
-          <nav>
-            <NavLink to={appLink}>Flashcards.</NavLink>
-          </nav>
+          {!user && (
+            <nav>
+              <NavLink to={appLink}>Flashcards.</NavLink>
+            </nav>
+          )}
         </div>
         <div className="auth-links">
           {user ? (
