@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import { BsArrowLeft, BsDownload, BsPrinter } from "react-icons/bs";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { BsArrowLeft, BsDownload, BsPrinter, BsQuestionCircle } from "react-icons/bs";
 import { CiShare2 } from "react-icons/ci";
 import { BiEdit } from "react-icons/bi";
 import Button from "../components/ui/button/Button";
@@ -10,13 +10,16 @@ import Slider from "../components/ui/slider/Slider";
 import PrintTemplate from "../components/template/PrintTemplate";
 import Spinner from "../components/ui/spinner/Spinner";
 import { useFlashcardGroup } from "../hooks/useFlashcards";
+import { useQuizAttempts } from "../hooks/useQuiz";
 import { useReactToPrint } from "react-to-print";
 
 const FlashcardDetails = () => {
   const params = useParams();
   const { id } = params;
+  const navigate = useNavigate();
   const [toggleModal, setToggleModal] = useState("hidden");
   const { data: flashcard, isLoading, isError } = useFlashcardGroup(id);
+  const { data: quizAttempts = [] } = useQuizAttempts(id);
 
   const pdfRef = useRef();
   const downloadPDF = useReactToPrint({
@@ -50,6 +53,13 @@ const FlashcardDetails = () => {
       btn_fn: useReactToPrint({
         content: () => termRef.current,
       }),
+    },
+    {
+      btn_id: 4,
+      btn_title: "take a quiz on this set",
+      btn_icon: <BsQuestionCircle className="text-blue-600" />,
+      btn_text: "Quiz Me",
+      btn_fn: () => navigate(`/app/dashboard/${id}/quiz`),
     },
   ];
 
@@ -213,6 +223,24 @@ const FlashcardDetails = () => {
               )
             )}
           </ul>
+
+          {quizAttempts.length > 0 && (
+            <div className="bg-white rounded-md shadow-sm mt-3 p-4 xl:w-52">
+              <h5 className="text-gray-500 font-semibold mb-2">
+                Quiz History
+              </h5>
+              <ul className="flex flex-col gap-1 text-sm text-gray-600">
+                {quizAttempts.slice(0, 5).map(({ id: attemptId, score, total, created_at }) => (
+                  <li key={attemptId} className="flex justify-between gap-3">
+                    <span>{new Date(created_at).toLocaleDateString()}</span>
+                    <span className="font-semibold">
+                      {score}/{total}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
