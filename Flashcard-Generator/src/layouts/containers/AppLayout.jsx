@@ -5,7 +5,7 @@ import Logo from "../../assets/logo.png";
 
 const AppLayout = () => {
   return (
-    <div className="bg-slate-100 min-h-screen pb-10">
+    <div className="bg-black min-h-screen pb-10 text-white">
       <Navbar Logo={Logo} />
       <Container />
     </div>

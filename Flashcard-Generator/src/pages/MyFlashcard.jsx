@@ -12,7 +12,7 @@ const MyFlashcard = () => {
 
   if (isError) {
     return (
-      <p className="text-center text-gray-500">
+      <p className="text-center text-gray-400">
         Couldn't load your flashcards. Try refreshing the page.
       </p>
     );
@@ -31,7 +31,7 @@ const MyFlashcard = () => {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search your flashcard sets..."
           aria-label="Search your flashcard sets"
-          className="p-2 text-lg border-2 rounded-md w-full max-w-sm mb-6"
+          className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md w-full max-w-sm mb-6 focus:outline-none focus:border-brandAqua"
         />
       )}
 
@@ -42,21 +42,21 @@ const MyFlashcard = () => {
       >
         {flashcards.length === 0 ? (
           <div className="flex flex-col items-center justify-center gap-4 text-center mx-auto">
-            <p className="text-black text-2xl">You don't have any flashcards</p>
+            <p className="text-white text-2xl">You don't have any flashcards</p>
             <NavLink
               role="link"
               to={"/app"}
               data-testid="navigation"
               name="Create Flashcard"
               className={
-                "px-6 py-2 bg-red-500 rounded-md text-xl font-semibold text-white hover:bg-red-700 transition-all"
+                "px-6 py-2 bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 rounded-md text-xl font-semibold text-white transition-all"
               }
             >
               Create Flashcard
             </NavLink>
           </div>
         ) : filteredFlashcards.length === 0 ? (
-          <p className="text-gray-500 mx-auto">
+          <p className="text-gray-400 mx-auto">
             No flashcard sets match "{search}".
           </p>
         ) : (

@@ -9,7 +9,7 @@ import Button from "./ui/button/Button";
 const CreateGroup = ({ values, setFieldValue }) => {
   // This function returns a `div` element that contains the create group and group description form.
   return (
-    <div className="bg-white shadow-md md:p-10 p-5 rounded-md sm:p-5">
+    <div className="bg-brandSurface shadow-md md:p-10 p-5 rounded-md sm:p-5">
       {/* This `div` element contains the group name input and the group image
       upload button. */}
       <div
@@ -29,7 +29,7 @@ const CreateGroup = ({ values, setFieldValue }) => {
           <Button
             type={"button"}
             btnclass={
-              "border-2 rounded-md min-w-max font-semibold text-lg px-6 py-2"
+              "border-2 border-brandBorder text-white rounded-md min-w-max font-semibold text-lg px-6 py-2 hover:border-brandAqua transition-all"
             }
             text={
               <>
@@ -37,7 +37,7 @@ const CreateGroup = ({ values, setFieldValue }) => {
                   htmlFor="profile"
                   className="flex items-center gap-1 cursor-pointer"
                 >
-                  <AiFillFileImage className="text-blue-700" />
+                  <AiFillFileImage className="text-brandAqua" />
                   {values.groups.Profile ? "Change" : "Upload"} Image
                   <Field
                     type="file"
@@ -69,7 +69,7 @@ const CreateGroup = ({ values, setFieldValue }) => {
               />
               <Button
                 type="button"
-                btnclass={"font-semibold text-blue-700 mt-5"}
+                btnclass={"font-semibold text-brandAqua mt-5"}
                 fn={() => {
                   setFieldValue("groups.Profile", null);
                   setFieldValue("groups.ProfileFile", null);
@@ -85,7 +85,7 @@ const CreateGroup = ({ values, setFieldValue }) => {
       <div className="flex flex-col gap-2 relative">
         <label
           htmlFor="groupDescription"
-          className="font-semibold text-gray-500"
+          className="font-semibold text-gray-300"
         >
           Add Description
         </label>
@@ -95,7 +95,7 @@ const CreateGroup = ({ values, setFieldValue }) => {
           id="groupDescription"
           maxLength="500"
           placeholder="Write your description here ( max length is 500 words )"
-          className="p-2 text-lg border-2 rounded-md h-36 resize-none"
+          className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md h-36 resize-none focus:outline-none focus:border-brandAqua"
         />
       </div>
     </div>

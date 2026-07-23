@@ -32,7 +32,7 @@ const FlashcardDetails = () => {
     {
       btn_id: 1,
       btn_title: "share the webpage",
-      btn_icon: <CiShare2 className="text-blue-600" />,
+      btn_icon: <CiShare2 className="text-brandAqua" />,
       btn_text: "Share",
       btn_fn: () => {
         setToggleModal("grid");
@@ -41,14 +41,14 @@ const FlashcardDetails = () => {
     {
       btn_id: 2,
       btn_title: "download as PDF",
-      btn_icon: <BsDownload className="text-blue-600" />,
+      btn_icon: <BsDownload className="text-brandAqua" />,
       btn_text: "Download",
       btn_fn: downloadPDF,
     },
     {
       btn_id: 3,
       btn_title: "print",
-      btn_icon: <BsPrinter className="text-blue-600" />,
+      btn_icon: <BsPrinter className="text-brandAqua" />,
       btn_text: "Print",
       btn_fn: useReactToPrint({
         content: () => termRef.current,
@@ -57,7 +57,7 @@ const FlashcardDetails = () => {
     {
       btn_id: 4,
       btn_title: "take a quiz on this set",
-      btn_icon: <BsQuestionCircle className="text-blue-600" />,
+      btn_icon: <BsQuestionCircle className="text-brandAqua" />,
       btn_text: "Quiz Me",
       btn_fn: () => navigate(`/app/dashboard/${id}/quiz`),
     },
@@ -100,7 +100,7 @@ const FlashcardDetails = () => {
 
   if (isError || !flashcard) {
     return (
-      <p className="text-center text-gray-500">
+      <p className="text-center text-gray-400">
         Couldn't find this flashcard set.
       </p>
     );
@@ -114,7 +114,7 @@ const FlashcardDetails = () => {
       <div className="flex items-start gap-5 mb-10">
         <div>
           <Link to="/app/dashboard">
-            <i className="text-xl text-red-600">
+            <i className="text-xl text-brandAqua">
               <BsArrowLeft />
             </i>
           </Link>
@@ -124,12 +124,12 @@ const FlashcardDetails = () => {
             <h3 className="text-2xl font-semibold leading-none capitalize mb-2">
               {flashcard.name}
             </h3>
-            <p>{flashcard.description}</p>
+            <p className="text-gray-300">{flashcard.description}</p>
           </div>
           <Link
             to={`/app/dashboard/${id}/edit`}
             title="edit this flashcard set"
-            className="flex items-center gap-2 text-blue-600 font-semibold"
+            className="flex items-center gap-2 text-brandAqua font-semibold"
           >
             <BiEdit /> Edit
           </Link>
@@ -137,11 +137,11 @@ const FlashcardDetails = () => {
       </div>
 
       <div className="xl:flex xl:gap-3 xl:items-start">
-        <div className="bg-white p-4 rounded-md max-h-96">
-          <h5 className="text-gray-500 border-b-2 border-b-gray-100 font-semibold">
+        <div className="bg-brandSurface p-4 rounded-md max-h-96">
+          <h5 className="text-gray-400 border-b-2 border-b-brandBorder font-semibold">
             Flashcards
           </h5>
-          <ul className="flex gap-3 mt-4 font-medium text-gray-600 xl:overflow-y-scroll max-h-80 pb-5 overflow-x-scroll xl:flex-col xl:w-52 xl:overflow-x-auto">
+          <ul className="flex gap-3 mt-4 font-medium text-gray-300 xl:overflow-y-scroll max-h-80 pb-5 overflow-x-scroll xl:flex-col xl:w-52 xl:overflow-x-auto">
             {flashcard.flashcard_terms.map(
               ({ term, definition, image_url }, index) => {
                 const isButtonRef = index === 0 ? buttonRef : null;
@@ -158,13 +158,13 @@ const FlashcardDetails = () => {
                 };
 
                 return (
-                  <li key={index} className="border-b border-gray-100">
+                  <li key={index} className="border-b border-brandBorder">
                     <button
                       type="button"
                       ref={isButtonRef}
                       onClick={handleClick}
-                      className={`text-left w-52 bg-gray-200 p-3 rounded-md shadow-sm truncate xl:w-full xl:bg-transparent xl:p-0 xl:pb-1 transition-all ${
-                        isActive ? "xl:text-blue-500 text-blue-500" : ""
+                      className={`text-left w-52 bg-gray-800 p-3 rounded-md shadow-sm truncate xl:w-full xl:bg-transparent xl:p-0 xl:pb-1 transition-all ${
+                        isActive ? "xl:text-brandAqua text-brandAqua" : ""
                       }`}
                     >
                       {term}
@@ -189,7 +189,7 @@ const FlashcardDetails = () => {
               type={"button"}
               text={<GrPrevious />}
               fn={() => displayData(active - 1)}
-              btnclass={"p-2 rounded-md active:bg-blue-100 hover:bg-gray-200"}
+              btnclass={"p-2 rounded-md active:bg-brandAqua/20 hover:bg-gray-800"}
             />
             <span>
               {state.index + 1}/{state.totalTerms}
@@ -198,7 +198,7 @@ const FlashcardDetails = () => {
               type={"button"}
               text={<GrNext />}
               fn={() => displayData(active + 1)}
-              btnclass={"p-2 rounded-md active:bg-blue-100 hover:bg-gray-200"}
+              btnclass={"p-2 rounded-md active:bg-brandAqua/20 hover:bg-gray-800"}
             />
           </div>
         </div>
@@ -217,7 +217,7 @@ const FlashcardDetails = () => {
                         {btn_text}
                       </>
                     }
-                    btnclass="flex items-center gap-2 bg-white rounded-md w-full shadow-sm transition-all px-6 py-2"
+                    btnclass="flex items-center gap-2 bg-brandSurface rounded-md w-full shadow-sm transition-all px-6 py-2 hover:bg-gray-800"
                   />
                 </li>
               )
@@ -225,11 +225,11 @@ const FlashcardDetails = () => {
           </ul>
 
           {quizAttempts.length > 0 && (
-            <div className="bg-white rounded-md shadow-sm mt-3 p-4 xl:w-52">
-              <h5 className="text-gray-500 font-semibold mb-2">
+            <div className="bg-brandSurface rounded-md shadow-sm mt-3 p-4 xl:w-52">
+              <h5 className="text-gray-400 font-semibold mb-2">
                 Quiz History
               </h5>
-              <ul className="flex flex-col gap-1 text-sm text-gray-600">
+              <ul className="flex flex-col gap-1 text-sm text-gray-300">
                 {quizAttempts.slice(0, 5).map(({ id: attemptId, score, total, created_at }) => (
                   <li key={attemptId} className="flex justify-between gap-3">
                     <span>{new Date(created_at).toLocaleDateString()}</span>

@@ -13,13 +13,13 @@ const CreateTerm = ({ values, setFieldValue }) => {
       <FieldArray
         name="terms"
         render={(arrayHelpers) => (
-          <ul className="bg-white md:p-10 rounded-md sm:p-5 p-5 shadow-md flex flex-col gap-8">
+          <ul className="bg-brandSurface md:p-10 rounded-md sm:p-5 p-5 shadow-md flex flex-col gap-8">
             {values.terms.map((item, index) => (
               <li
                 key={index}
                 className="flex gap-5 items-start md:flex-row flex-col sm:flex-col sm:w-full"
               >
-                <span className="px-4 py-2 text-xl font-bold rounded-full bg-red-200">
+                <span className="px-4 py-2 text-xl font-bold rounded-full bg-red-600 text-white">
                   {index + 1}
                 </span>
                 <div className="flex items-end flex-wrap gap-5 md:flex-row sm:flex-col flex-col w-full">
@@ -42,7 +42,7 @@ const CreateTerm = ({ values, setFieldValue }) => {
                       <Button
                         type={"button"}
                         btnclass={
-                          "border-2 rounded-md  min-w-max font-semibold text-lg px-6 py-2"
+                          "border-2 border-brandBorder text-white rounded-md min-w-max font-semibold text-lg px-6 py-2 hover:border-brandAqua transition-all"
                         }
                         text={
                           <>
@@ -50,7 +50,7 @@ const CreateTerm = ({ values, setFieldValue }) => {
                               htmlFor={`cardImage-${index}`}
                               className="flex items-center cursor-pointer"
                             >
-                              <AiFillFileImage className="text-blue-700" />
+                              <AiFillFileImage className="text-brandAqua" />
                               Upload Image
                               <input
                                 type="file"
@@ -104,7 +104,7 @@ const CreateTerm = ({ values, setFieldValue }) => {
                                 htmlFor={`cardImage-${index}`}
                                 className="flex items-center cursor-pointer"
                               >
-                                <BiEdit className="text-blue-700 text-3xl cursor-pointer" />
+                                <BiEdit className="text-brandAqua text-3xl cursor-pointer" />
                                 <input
                                   type="file"
                                   id={`cardImage-${index}`}
@@ -131,7 +131,7 @@ const CreateTerm = ({ values, setFieldValue }) => {
                     <div>
                       <Button
                         type="button"
-                        btnclass={"font-semibold text-blue-700 mt-5"}
+                        btnclass={"font-semibold text-brandAqua mt-5"}
                         fn={() => arrayHelpers.remove(index)}
                         text={"- Remove"}
                         list
@@ -146,7 +146,7 @@ const CreateTerm = ({ values, setFieldValue }) => {
               <Button
                 type="button"
                 fn={() => arrayHelpers.push("")}
-                btnclass={"font-semibold text-blue-700 mt-5"}
+                btnclass={"font-semibold text-brandAqua mt-5"}
                 text={"+ Add more"}
               />
             </li>

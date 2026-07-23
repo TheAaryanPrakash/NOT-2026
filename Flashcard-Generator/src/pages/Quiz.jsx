@@ -42,7 +42,7 @@ const Quiz = () => {
 
   if (isError || !flashcard) {
     return (
-      <p className="text-center text-gray-500">
+      <p className="text-center text-gray-400">
         Couldn't load this flashcard set.
       </p>
     );
@@ -51,12 +51,12 @@ const Quiz = () => {
   if (flashcard.flashcard_terms.length < 2) {
     return (
       <div className="text-center">
-        <p className="text-gray-500 mb-5">
+        <p className="text-gray-400 mb-5">
           Add at least 2 terms to this set before taking a quiz.
         </p>
         <Link
           to={`/app/dashboard/${id}`}
-          className="text-red-600 font-semibold"
+          className="text-brandAqua font-semibold"
         >
           Back to flashcard set
         </Link>
@@ -89,10 +89,10 @@ const Quiz = () => {
   if (finished) {
     return (
       <div className="text-center flex flex-col items-center gap-5">
-        <h2 className="text-3xl font-bold">Quiz complete!</h2>
+        <h2 className="text-3xl font-bold text-brandAqua">Quiz complete!</h2>
         <p className="text-xl">
           You scored{" "}
-          <span className="font-bold text-red-600">
+          <span className="font-bold text-brandAqua">
             {score}/{questions.length}
           </span>
         </p>
@@ -101,11 +101,11 @@ const Quiz = () => {
             type="button"
             text="Retake Quiz"
             fn={() => navigate(0)}
-            btnclass="px-6 py-2 bg-red-600 text-white rounded-md font-semibold"
+            btnclass="px-6 py-2 bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-md font-semibold transition-all"
           />
           <Link
             to={`/app/dashboard/${id}`}
-            className="px-6 py-2 border-2 rounded-md font-semibold"
+            className="px-6 py-2 border-2 border-brandBorder rounded-md font-semibold hover:border-brandAqua transition-all"
           >
             Back to Set
           </Link>
@@ -118,7 +118,7 @@ const Quiz = () => {
     <div>
       <div className="flex items-center gap-5 mb-8">
         <Link to={`/app/dashboard/${id}`}>
-          <i className="text-xl text-red-600">
+          <i className="text-xl text-brandAqua">
             <BsArrowLeft />
           </i>
         </Link>
@@ -128,10 +128,10 @@ const Quiz = () => {
       </div>
 
       <div className="max-w-2xl mx-auto">
-        <p className="text-gray-500 mb-2">
+        <p className="text-gray-400 mb-2">
           Question {index + 1}/{questions.length}
         </p>
-        <div className="bg-white p-6 rounded-md shadow-sm mb-6">
+        <div className="bg-brandSurface p-6 rounded-md shadow-sm mb-6">
           <h4 className="text-xl font-semibold">{question.term}</h4>
         </div>
 
@@ -140,10 +140,12 @@ const Quiz = () => {
             const isCorrect = choice === question.correctDefinition;
             const isSelected = choice === selected;
 
-            let stateClass = "bg-white hover:bg-gray-100";
+            let stateClass = "bg-brandSurface border-brandBorder hover:bg-gray-800";
             if (selected) {
-              if (isCorrect) stateClass = "bg-green-100 border-green-500";
-              else if (isSelected) stateClass = "bg-red-100 border-red-500";
+              if (isCorrect)
+                stateClass = "bg-green-900/40 border-green-500 text-green-300";
+              else if (isSelected)
+                stateClass = "bg-red-900/40 border-red-500 text-red-300";
             }
 
             return (
@@ -165,7 +167,7 @@ const Quiz = () => {
               type="button"
               text={index + 1 < questions.length ? "Next Question" : "See Results"}
               fn={handleNext}
-              btnclass="px-8 py-3 bg-red-600 text-white rounded-md font-semibold"
+              btnclass="px-8 py-3 bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-md font-semibold transition-all"
             />
           </div>
         )}

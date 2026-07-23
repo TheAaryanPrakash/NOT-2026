@@ -12,7 +12,7 @@ const Card = ({ group, groupDesc, terms, image, id }) => {
 
   return (
     <div
-      className="sm:w-72 w-full md:w-80 lg:w-80 mx-auto sm:mx-0 bg-white border border-gray-300 shadow-sm rounded-md p-5 pt-8 flex flex-col justify-between"
+      className="sm:w-72 w-full md:w-80 lg:w-80 mx-auto sm:mx-0 bg-brandSurface border border-gray-800 shadow-sm rounded-md p-5 pt-8 flex flex-col justify-between text-white"
       id={id}
     >
       <div className="flex items-center gap-5">
@@ -29,18 +29,18 @@ const Card = ({ group, groupDesc, terms, image, id }) => {
           <h2 className="font-bold text-lg break-words line-clamp-1">
             {group}
           </h2>
-          <span className="text-gray-500 font-semibold">
+          <span className="text-gray-400 font-semibold">
             {terms.length} {terms.length <= 1 ? "Term" : "Terms"}
           </span>
         </div>
       </div>
 
       <div className="space-y-4 mt-4">
-        <p className="text-gray-600 line-clamp-2">{groupDesc}</p>
+        <p className="text-gray-400 line-clamp-2">{groupDesc}</p>
         <div className="flex items-center justify-between">
         <Link
           to={`/app/dashboard/${id}`}
-          className="flex items-center gap-5 text-red-600 font-semibold"
+          className="flex items-center gap-5 text-brandAqua font-semibold"
           title="view card details"
         >
           View Card
@@ -53,7 +53,7 @@ const Card = ({ group, groupDesc, terms, image, id }) => {
           <Link
             to={`/app/dashboard/${id}/edit`}
             title="edit card"
-            className="p-1 rounded-md text-blue-600 text-xl transition-all bg-blue-100 hover:bg-blue-200 active:bg-blue-300"
+            className="p-1 rounded-md text-brandAqua text-xl transition-all bg-brandAqua/10 hover:bg-brandAqua/20 active:bg-brandAqua/30"
           >
             <BiEdit />
           </Link>
@@ -62,7 +62,7 @@ const Card = ({ group, groupDesc, terms, image, id }) => {
             text={<TbTrashX />}
             fn={() => deleteFlashcardGroup(id)}
             btnclass={
-              "p-1 rounded-md text-red-500 text-xl transition-all bg-red-100 hover:bg-red-200 active:bg-red-300"
+              "p-1 rounded-md text-red-500 text-xl transition-all bg-red-500/10 hover:bg-red-500/20 active:bg-red-500/30"
             }
           />
         </div>

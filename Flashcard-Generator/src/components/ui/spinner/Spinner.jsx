@@ -3,9 +3,9 @@ import React from "react";
 const Spinner = () => {
   return (
     <div className="relative h-screen w-full grid place-items-center">
-      <span className="w-12 h-12 rounded-full absolute border-8 border-dashed border-gray-200"></span>
+      <span className="w-12 h-12 rounded-full absolute border-8 border-dashed border-gray-800"></span>
 
-      <span className="w-12 h-12 rounded-full animate-spin absolute border-8 border-dashed border-blue-500 border-t-transparent"></span>
+      <span className="w-12 h-12 rounded-full animate-spin absolute border-8 border-dashed border-brandAqua border-t-transparent"></span>
     </div>
   );
 };

@@ -54,7 +54,7 @@ const FlashcardForm = ({
             )}
 
             {formError && (
-              <p className="text-red-600 font-semibold">{formError}</p>
+              <p className="text-red-400 font-semibold">{formError}</p>
             )}
 
             {enableAiGenerate && (
@@ -70,8 +70,10 @@ const FlashcardForm = ({
               data-testid="submit-form"
               disabled={!(isValid && dirty) || isSubmitting}
               type="submit"
-              btnclass={`font-semibold rounded-md text-white text-xl px-14 py-4 ${
-                !isValid ? "bg-red-200" : "bg-red-600"
+              btnclass={`font-semibold rounded-md text-white text-xl px-14 py-4 transition-all ${
+                !isValid
+                  ? "bg-gray-800 text-gray-500"
+                  : "bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500"
               }`}
               text={isSubmitting ? "Saving..." : submitLabel}
             />

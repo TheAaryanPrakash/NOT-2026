@@ -75,8 +75,8 @@ const ShareModal = ({ show, hide, flashcard }) => {
     <div
       className={`fixed inset-0 w-full h-screen place-items-center bg-gray-500 bg-opacity-60 backdrop-blur-[1px] ${show}`}
     >
-      <div className="bg-white p-10 w-96 rounded-md shadow-md relative">
-        <div className="absolute top-3 right-3 text-2xl text-gray-500 hover:text-gray-600 transition-all">
+      <div className="bg-brandSurface text-white p-10 w-96 rounded-md shadow-md relative">
+        <div className="absolute top-3 right-3 text-2xl text-gray-400 hover:text-brandAqua transition-all">
           <Button
             type={"button"}
             text={<VscClose />}
@@ -86,9 +86,9 @@ const ShareModal = ({ show, hide, flashcard }) => {
           />
         </div>
 
-        <h3 className="font-semibold">Share</h3>
+        <h3 className="font-semibold text-brandAqua">Share</h3>
 
-        <label className="flex items-center gap-2 mt-4 text-gray-600">
+        <label className="flex items-center gap-2 mt-4 text-gray-300">
           <input
             type="checkbox"
             checked={flashcard.is_public}
@@ -114,12 +114,12 @@ const ShareModal = ({ show, hide, flashcard }) => {
                   id="page_url"
                   disabled
                   value={shareUrl}
-                  className="border-2 border-gray-300 border-dashed px-2 py-1 rounded-md w-60 truncate"
+                  className="border-2 border-gray-700 border-dashed bg-black text-white px-2 py-1 rounded-md w-60 truncate"
                 />
               </div>
 
               <div>
-                <ul className="flex items-center gap-3 text-xl text-gray-500 hover:text-gray-600 transition-all">
+                <ul className="flex items-center gap-3 text-xl text-gray-400 hover:text-brandAqua transition-all">
                   <li>
                     <button
                       type="button"

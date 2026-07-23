@@ -20,8 +20,8 @@ const Navbar = ({ Logo }) => {
         md:px-10
         lg:px-15
         xl:px-20
-        bg-white
-        shadow-md
+        bg-black
+        border-b-2 border-brandBorder
         flex items-center justify-between
       "
       >
@@ -33,7 +33,7 @@ const Navbar = ({ Logo }) => {
         <button
           type="button"
           onClick={handleSignOut}
-          className="font-semibold text-gray-500 hover:text-red-600 transition-all"
+          className="font-semibold text-gray-400 hover:text-brandAqua transition-all"
         >
           Sign Out
         </button>

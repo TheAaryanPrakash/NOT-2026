@@ -66,9 +66,11 @@ const AiGenerator = ({ setFieldValue }) => {
   const busy = isExtracting || isGenerating;
 
   return (
-    <div className="bg-white shadow-md md:p-10 p-5 rounded-md sm:p-5">
-      <h3 className="font-semibold text-lg mb-3">Generate with AI</h3>
-      <p className="text-gray-500 mb-4">
+    <div className="bg-brandSurface shadow-md md:p-10 p-5 rounded-md sm:p-5">
+      <h3 className="font-semibold text-lg mb-3 text-brandAqua">
+        Generate with AI
+      </h3>
+      <p className="text-gray-400 mb-4">
         Paste notes below, or upload a PDF / image of your notes, and AI will
         turn them into a flashcard set you can review and edit before saving.
       </p>
@@ -76,10 +78,10 @@ const AiGenerator = ({ setFieldValue }) => {
       <div className="mb-4">
         <Button
           type="button"
-          btnclass="border-2 rounded-md min-w-max font-semibold text-lg px-6 py-2"
+          btnclass="border-2 border-brandBorder text-white rounded-md min-w-max font-semibold text-lg px-6 py-2 hover:border-brandAqua transition-all"
           text={
             <label className="flex items-center gap-1 cursor-pointer">
-              <AiFillFileImage className="text-blue-700" />
+              <AiFillFileImage className="text-brandAqua" />
               {isExtracting ? "Reading file..." : "Upload PDF or Image"}
               <input
                 type="file"
@@ -97,16 +99,18 @@ const AiGenerator = ({ setFieldValue }) => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
         placeholder="Paste your notes here (at least a few sentences)..."
-        className="p-2 text-lg border-2 rounded-md h-40 w-full resize-none"
+        className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md h-40 w-full resize-none focus:outline-none focus:border-brandAqua"
       />
-      {error && <p className="text-red-600 font-semibold mt-2">{error}</p>}
+      {error && <p className="text-red-400 font-semibold mt-2">{error}</p>}
       <div className="mt-4">
         <Button
           type="button"
           disabled={notes.trim().length < 20 || busy}
           fn={handleGenerate}
-          btnclass={`font-semibold rounded-md text-white px-6 py-2 ${
-            notes.trim().length < 20 || busy ? "bg-red-200" : "bg-red-600"
+          btnclass={`font-semibold rounded-md text-white px-6 py-2 transition-all ${
+            notes.trim().length < 20 || busy
+              ? "bg-gray-800 text-gray-500"
+              : "bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500"
           }`}
           text={isGenerating ? "Generating..." : "Generate Flashcards"}
         />

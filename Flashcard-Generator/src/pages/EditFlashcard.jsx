@@ -32,7 +32,7 @@ const EditFlashcard = () => {
 
   if (isError || !group) {
     return (
-      <p className="text-center text-gray-500">
+      <p className="text-center text-gray-400">
         Couldn't load this flashcard set.
       </p>
     );
