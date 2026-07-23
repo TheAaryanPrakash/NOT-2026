@@ -1,0 +1,329 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inria Sans', sans-serif;
+}
+
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    width: 100vw;
+    font-family: 'Inria Sans', sans-serif;
+}
+
+h1{
+    color: aqua;
+}
+h2{
+    color: aqua;
+}
+
+.inria-sans-bold {
+    font-family: "Inria Sans", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+/* Header Styles */
+.header {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.header img {
+    width: 50px;
+    height: auto;
+}
+
+.header nav {
+    margin-left: 15px;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+    margin-right: 15px;
+}
+
+.header .sign-in {
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(0, 255, 191);
+}
+
+.intro-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+    padding-top: 80px; 
+}
+
+/* Intro Content */
+.intro-content {
+    text-align: center;
+}
+
+.intro-content h1 {
+    font-size: 5em;
+    letter-spacing: 5px;
+}
+
+.intro-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.intro-moon {
+    background: url('./Resources/moon.jpeg') no-repeat center/cover;
+    width: 250px;
+    height: 250px;
+}
+
+/* Flashcards and Quizzes */
+.flashcard-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    background: linear-gradient(135deg, #ff0000, #ff00dd);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.moon-center {
+    background: url('./Resources/full-moon.jpg') no-repeat center/cover;
+    width: 250px;
+    height: 250px;
+}
+
+/* Flashcard Options */
+.flashcard-options {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    padding: 20px;
+    background-color: black;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.flashcard-options .moon {
+    background: url('./Resources/full-moon.jpg') no-repeat center/cover;
+    width: 250px;
+    height: 250px;
+}
+
+.flashcard-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    padding: 20px;
+}
+
+.flashcard-buttons h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+}
+
+/* Sign-In Section */
+.signin-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+}
+
+.signin-container {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.signin-logo {
+    width: 80px;
+    height: auto;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .intro-section {
+        flex-direction: column;
+        padding-top: 100px;
+    }
+
+    .intro-content h1 {
+        font-size: 3em;
+    }
+
+    .intro-moon, .moon-center, .flashcard-options .moon {
+        width: 150px;
+        height: 150px;
+    }
+
+    .flashcard-section, .flashcard-options {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .signin-container {
+        padding: 20px;
+    }
+
+    .signin-logo {
+        width: 60px;
+    }
+
+    .signin-form h1 {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-content h1 {
+        font-size: 2.5em;
+    }
+
+    .intro-moon, .moon-center, .flashcard-options .moon {
+        width: 120px;
+        height: 120px;
+    }
+
+    .card {
+        width: 160px;
+        height: 240px;
+        font-size: 1.5em;
+    }
+
+    .flashcard-buttons h2 {
+        font-size: 1.5em;
+    }
+}
+
+/* Sign-Up Page */
+.signin-section {
+    background-color: black;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    padding: 20px;
+}
+
+.signin-container {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.signin-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.signin-container h1 {
+    font-size: 2.5em;
+    color: aqua;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-control {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+.button {
+    background-color: #444;
+    color: rgb(0, 255, 191);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #555;
+}
+

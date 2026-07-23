@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="d-flex align-items-center">
+            <a href="index.html">
+                <img src="./Resources/full-moon.jpg" alt="Logo">
+            </a>
+            <nav>
+                <a href="flashcards.html">Flashcards.</a>
+            </nav>
+        </div>
+        <div class="auth-links">
+            <a href="signup.html" class="sign-in">Sign Up.</a>
+            <a href="signin.html" class="sign-in">Sign In.</a>
+        </div>
+    </header>
+
+
+    <body class="signin-body">
+
+    <!-- Sign In Section -->
+    <section class="signin-section">
+        <div class="signin-container d-flex flex-column align-items-center justify-content-center">
+            <!-- Logo Image -->
+            <div class="image-space">
+                <img src="./Resources/full-moon.jpg" alt="Your Logo" class="signin-logo">
+            </div>
+
+            <!-- Sign In Form -->
+            <form action="#" method="POST" class="signin-form text-center">
+                <h2 class="signin-heading">Sign In.</h2>
+                
+                <!-- Username Field -->
+                <input type="text" name="username" id="username" placeholder="Username" class="form-control mb-3 input-box" required>
+                
+                <!-- Password Field -->
+                <input type="password" name="password" id="password" placeholder="Password" class="form-control mb-3 input-box" required>
+                
+                <!-- Sign In Button -->
+                <button type="submit" class="btn btn-primary signin-button">Sign In.</button>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

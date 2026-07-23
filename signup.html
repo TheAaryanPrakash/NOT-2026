@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./signup.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="d-flex align-items-center">
+            <a href="index.html">
+                <img src="./Resources/full-moon.jpg" alt="Logo">
+            </a>
+            <nav>
+                <a href="flashcards.html">Flashcards.</a>
+            </nav>
+        </div>
+        <div class="auth-links">
+            <a href="signup.html" class="sign-in">Sign Up.</a>
+            <a href="signin.html" class="sign-in">Sign In.</a>
+        </div>
+    </header>
+
+    <!-- Sign-Up Section -->
+    <section class="signin-section">
+        <div class="signin-container">
+            <img src="./Resources/full-moon.jpg" alt="Logo" class="signin-logo">
+            <h1>Sign Up.</h1>
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Repeat Password" required>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="education-level" onchange="showAdditionalFields()" required>
+                        <option value="" disabled selected>Current Education Level.</option>
+                        <option value="primary">Primary School.</option>
+                        <option value="middle">Middle School.</option>
+                        <option value="high-school">High School Graduate.</option>
+                        <option value="bachelors">Bachelors.</option>
+                        <option value="masters">Masters.</option>
+                        <option value="prefer-not">Prefer Not to Say.</option>
+                    </select>
+                </div>
+                <div id="major-field" class="form-group" style="display: none;">
+                    <input type="text" class="form-control" placeholder="Major">
+                </div>
+                <div id="semester-field" class="form-group" style="display: none;">
+                    <input type="text" class="form-control" placeholder="Semester">
+                </div>
+                <button type="submit" class="btn btn-primary signin-button">Sign Up.</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

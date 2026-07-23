@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+.landing-page {
+    font-family: 'Inria Sans', sans-serif;
+    background-color: black;
+    color: white;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.landing-page h1 {
+    color: aqua;
+}
+
+.landing-page .inria-sans-bold {
+    font-weight: 700;
+}
+
+/* Header */
+.landing-page .header {
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #333;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.landing-page .header img {
+    width: 50px;
+    height: auto;
+}
+
+.landing-page .header nav {
+    margin-left: 15px;
+}
+
+.landing-page .header a {
+    text-decoration: none;
+    color: white;
+    margin-right: 15px;
+}
+
+.landing-page .header .sign-in {
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgb(0, 255, 191);
+}
+
+.landing-page .intro-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.landing-page .intro-content {
+    text-align: center;
+}
+
+.landing-page .intro-content h1 {
+    font-size: 5em;
+    letter-spacing: 5px;
+}
+
+.landing-page .intro-content p {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.landing-page .intro-moon {
+    background: url('../../assets/landing/moon.jpeg') no-repeat center/cover;
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
+
+.landing-page .flashcard-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    padding: 20px;
+    gap: 20px;
+}
+
+.landing-page .card {
+    width: 200px;
+    height: 300px;
+    background: linear-gradient(135deg, #ff0000, #ff00dd);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.landing-page .moon-center {
+    background: url('../../assets/landing/full-moon.jpg') no-repeat center/cover;
+    width: 250px;
+    height: 250px;
+}
+
+@media (max-width: 768px) {
+    .landing-page .intro-section {
+        flex-direction: column;
+        padding-top: 100px;
+    }
+
+    .landing-page .intro-content h1 {
+        font-size: 3em;
+    }
+
+    .landing-page .intro-moon,
+    .landing-page .moon-center {
+        width: 150px;
+        height: 150px;
+    }
+
+    .landing-page .flashcard-section {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .landing-page .intro-content h1 {
+        font-size: 2.5em;
+    }
+
+    .landing-page .intro-moon,
+    .landing-page .moon-center {
+        width: 120px;
+        height: 120px;
+    }
+
+    .landing-page .card {
+        width: 160px;
+        height: 240px;
+        font-size: 1.5em;
+    }
+}
