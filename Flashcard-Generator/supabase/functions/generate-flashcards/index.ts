@@ -64,10 +64,19 @@ Deno.serve(async (req) => {
       );
     }
 
+    const wordCount = text.trim().split(/\s+/).length;
+
     const prompt = `You are a study assistant. Read the notes below and produce flashcards.
 Return ONLY valid JSON, no markdown fences, matching exactly this shape:
 {"group": "short 2-6 word title for this set", "terms": [{"term": "a question or concept, 10-200 characters", "definition": "a clear explanation, at least 100 characters and at most 2000 characters"}]}
-Produce between 3 and 10 terms depending on how much material is in the notes. Do not invent facts that aren't supported by the notes.
+
+The number of terms must scale with how much material is actually in the
+notes — do not default to a fixed number. Roughly one term per 100-150
+words of notes, with a hard minimum of 3 and a hard maximum of 12. These
+notes are about ${wordCount} words, so aim for approximately
+${Math.max(3, Math.min(12, Math.round(wordCount / 125)))} terms, adjusted
+up or down based on how many distinct concepts are actually covered.
+Do not invent facts that aren't supported by the notes.
 
 Notes:
 """${text.slice(0, 12000)}"""`;
