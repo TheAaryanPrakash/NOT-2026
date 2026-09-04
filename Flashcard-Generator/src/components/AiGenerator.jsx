@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiFillFileImage } from "react-icons/ai";
+import { AnimatePresence, motion } from "framer-motion";
 import { supabase } from "../lib/supabaseClient";
 import { extractTextFromFile } from "../lib/textExtraction";
 import Button from "./ui/button/Button";
@@ -78,11 +79,23 @@ const AiGenerator = ({ setFieldValue }) => {
   const busy = isExtracting || isGenerating;
 
   return (
-    <div className="bg-brandSurface shadow-md md:p-10 p-5 rounded-md sm:p-5">
-      <h3 className="font-semibold text-lg mb-3 text-brandAqua">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-brandSurface border border-brandCyan/20 shadow-md md:p-10 p-5 rounded-xl sm:p-5 relative overflow-hidden"
+    >
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-10 -right-10 w-40 h-40 rounded-full bg-brandCyan/10 blur-3xl -z-10"
+        animate={{ opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <h3 className="relative font-display font-semibold text-lg mb-3 text-brandCyan flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse" />
         Generate with AI
       </h3>
-      <p className="text-gray-400 mb-4">
+      <p className="text-gray-400 mb-4 text-sm">
         Paste notes below, or upload a PDF / image of your notes, and AI will
         turn them into a flashcard set you can review and edit before saving.
       </p>
@@ -90,10 +103,10 @@ const AiGenerator = ({ setFieldValue }) => {
       <div className="mb-4">
         <Button
           type="button"
-          btnclass="border-2 border-brandBorder text-white rounded-md min-w-max font-semibold text-lg px-6 py-2 hover:border-brandAqua transition-all"
+          btnclass="border border-brandBorder text-white rounded-lg min-w-max font-semibold text-sm px-5 py-2.5 hover:border-brandCyan transition-colors"
           text={
-            <label className="flex items-center gap-1 cursor-pointer">
-              <AiFillFileImage className="text-brandAqua" />
+            <label className="flex items-center gap-2 cursor-pointer">
+              <AiFillFileImage className="text-brandCyan" />
               {isExtracting ? "Reading file..." : "Upload PDF or Image"}
               <input
                 type="file"
@@ -111,23 +124,36 @@ const AiGenerator = ({ setFieldValue }) => {
         value={notes}
         onChange={(e) => setNotes(e.target.value)}
         placeholder="Paste your notes here (at least a few sentences)..."
-        className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md h-40 w-full resize-none focus:outline-none focus:border-brandAqua"
+        className="p-3 text-base border border-brandBorder bg-brandBg text-white placeholder-gray-600 rounded-lg h-40 w-full resize-none transition-colors focus:outline-none focus:border-brandCyan focus:ring-1 focus:ring-brandCyan/50"
       />
-      {error && <p className="text-red-400 font-semibold mt-2">{error}</p>}
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            key="ai-error"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0, x: [0, -8, 8, -6, 6, 0] }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.4 }}
+            className="text-brandRed font-semibold mt-2 text-sm"
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
       <div className="mt-4">
         <Button
           type="button"
           disabled={notes.trim().length < 20 || busy}
           fn={handleGenerate}
-          btnclass={`font-semibold rounded-md text-white px-6 py-2 transition-all ${
+          btnclass={`font-semibold rounded-lg px-6 py-2.5 text-sm transition-colors ${
             notes.trim().length < 20 || busy
-              ? "bg-gray-800 text-gray-500"
-              : "bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500"
+              ? "bg-brandBorder text-gray-500"
+              : "bg-brandCyan text-black hover:bg-white"
           }`}
           text={isGenerating ? "Generating..." : "Generate Flashcards"}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

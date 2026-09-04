@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsArrowLeft } from "react-icons/bs";
+import { AnimatePresence, motion } from "framer-motion";
 import Spinner from "../components/ui/spinner/Spinner";
 import Button from "../components/ui/button/Button";
 import { useFlashcardGroup } from "../hooks/useFlashcards";
@@ -56,7 +57,7 @@ const Quiz = () => {
         </p>
         <Link
           to={`/app/dashboard/${id}`}
-          className="text-brandAqua font-semibold"
+          className="text-brandCyan font-semibold hover:text-white transition-colors"
         >
           Back to flashcard set
         </Link>
@@ -88,29 +89,42 @@ const Quiz = () => {
 
   if (finished) {
     return (
-      <div className="text-center flex flex-col items-center gap-5">
-        <h2 className="text-3xl font-bold text-brandAqua">Quiz complete!</h2>
-        <p className="text-xl">
-          You scored{" "}
-          <span className="font-bold text-brandAqua">
-            {score}/{questions.length}
-          </span>
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-center flex flex-col items-center gap-3"
+      >
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-gray-500">
+          Quiz complete
+        </p>
+        <motion.p
+          initial={{ scale: 0.6, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 220, damping: 16, delay: 0.1 }}
+          className="font-display text-7xl md:text-8xl font-bold tracking-tight text-brandCyan leading-none"
+        >
+          {score}
+          <span className="text-white/30">/{questions.length}</span>
+        </motion.p>
+        <p className="text-gray-400 mb-2">
+          {Math.round((score / questions.length) * 100)}% correct
         </p>
         <div className="flex items-center gap-4">
           <Button
             type="button"
             text="Retake Quiz"
             fn={() => navigate(0)}
-            btnclass="px-6 py-2 bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-md font-semibold transition-all"
+            btnclass="px-6 py-2.5 bg-brandCyan hover:bg-white text-black rounded-xl font-semibold transition-colors"
           />
           <Link
             to={`/app/dashboard/${id}`}
-            className="px-6 py-2 border-2 border-brandBorder rounded-md font-semibold hover:border-brandAqua transition-all"
+            className="px-6 py-2.5 border border-brandBorder rounded-xl font-semibold hover:border-brandCyan transition-colors"
           >
             Back to Set
           </Link>
         </div>
-      </div>
+      </motion.div>
     );
   }
 
@@ -118,59 +132,91 @@ const Quiz = () => {
     <div>
       <div className="flex items-center gap-5 mb-8">
         <Link to={`/app/dashboard/${id}`}>
-          <i className="text-xl text-brandAqua">
+          <i className="text-xl text-brandCyan">
             <BsArrowLeft />
           </i>
         </Link>
-        <h3 className="text-2xl font-semibold capitalize">
+        <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight capitalize text-white">
           {flashcard.name} &mdash; Quiz
         </h3>
       </div>
 
       <div className="max-w-2xl mx-auto">
-        <p className="text-gray-400 mb-2">
-          Question {index + 1}/{questions.length}
-        </p>
-        <div className="bg-brandSurface p-6 rounded-md shadow-sm mb-6">
-          <h4 className="text-xl font-semibold">{question.term}</h4>
+        <div className="flex items-center justify-between mb-2">
+          <p className="text-gray-500 text-xs font-mono uppercase tracking-[0.2em]">
+            Question {String(index + 1).padStart(2, "0")} / {String(questions.length).padStart(2, "0")}
+          </p>
         </div>
+        <div className="h-1 bg-brandBorder rounded-full mb-6 overflow-hidden">
+          <motion.div
+            className="h-full bg-brandCyan rounded-full"
+            initial={false}
+            animate={{ width: `${((index + 1) / questions.length) * 100}%` }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -24 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <div className="bg-brandSurface border border-brandBorder p-6 rounded-xl shadow-sm mb-6">
+              <h4 className="font-display text-2xl font-bold tracking-tight text-white">{question.term}</h4>
+            </div>
 
-        <div className="flex flex-col gap-3">
-          {question.choices.map((choice, i) => {
-            const isCorrect = choice === question.correctDefinition;
-            const isSelected = choice === selected;
+            <div className="flex flex-col gap-3">
+              {question.choices.map((choice, i) => {
+                const isCorrect = choice === question.correctDefinition;
+                const isSelected = choice === selected;
 
-            let stateClass = "bg-brandSurface border-brandBorder hover:bg-gray-800";
-            if (selected) {
-              if (isCorrect)
-                stateClass = "bg-green-900/40 border-green-500 text-green-300";
-              else if (isSelected)
-                stateClass = "bg-red-900/40 border-red-500 text-red-300";
-            }
+                let stateClass = "bg-brandSurface border-brandBorder hover:border-brandCyan/50";
+                if (selected) {
+                  if (isCorrect)
+                    stateClass = "bg-brandCyan/10 border-brandCyan text-white";
+                  else if (isSelected)
+                    stateClass = "bg-brandRed/10 border-brandRed/60 text-brandRed";
+                }
 
-            return (
-              <button
-                key={i}
+                return (
+                  <motion.button
+                    key={i}
+                    type="button"
+                    onClick={() => handleAnswer(choice)}
+                    whileHover={!selected ? { scale: 1.015 } : undefined}
+                    whileTap={!selected ? { scale: 0.985 } : undefined}
+                    animate={isSelected && !isCorrect ? { x: [0, -8, 8, -6, 6, 0] } : {}}
+                    transition={{ duration: 0.4 }}
+                    className={`text-left p-4 rounded-xl border shadow-sm transition-colors ${stateClass}`}
+                  >
+                    {choice}
+                  </motion.button>
+                );
+              })}
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {selected && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 12 }}
+              transition={{ duration: 0.3 }}
+              className="mt-6 text-center"
+            >
+              <Button
                 type="button"
-                onClick={() => handleAnswer(choice)}
-                className={`text-left p-4 rounded-md border-2 shadow-sm transition-all ${stateClass}`}
-              >
-                {choice}
-              </button>
-            );
-          })}
-        </div>
-
-        {selected && (
-          <div className="mt-6 text-center">
-            <Button
-              type="button"
-              text={index + 1 < questions.length ? "Next Question" : "See Results"}
-              fn={handleNext}
-              btnclass="px-8 py-3 bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500 text-white rounded-md font-semibold transition-all"
-            />
-          </div>
-        )}
+                text={index + 1 < questions.length ? "Next Question" : "See Results"}
+                fn={handleNext}
+                btnclass="px-8 py-3 bg-brandCyan hover:bg-white text-black rounded-xl font-semibold transition-colors"
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

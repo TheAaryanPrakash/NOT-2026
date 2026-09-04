@@ -11,3 +11,8 @@ node_modules/
 # build output
 build/
 dist/
+
+# Claude Code skill tooling (local dev aid, not app code)
+.claude/
+.agents/
+skills-lock.json

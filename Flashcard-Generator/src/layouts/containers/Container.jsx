@@ -5,7 +5,7 @@ import Routes from "../../routes/routes";
 const Container = () => {  
   return (
     <main>
-      <section className="max-w-screen-2xl px-3 mx-auto my-8 mt-20 xl:px-20 lg:px-14 md:px-10">
+      <section className="max-w-screen-2xl px-3 mx-auto mt-8 mb-8 xl:px-20 lg:px-14 md:px-10">
         <SubNav />
         <Routes />
       </section>

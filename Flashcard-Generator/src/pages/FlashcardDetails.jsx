@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsArrowLeft, BsDownload, BsPrinter, BsQuestionCircle } from "react-icons/bs";
 import { CiShare2 } from "react-icons/ci";
 import { BiEdit } from "react-icons/bi";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "../components/ui/button/Button";
 import { GrNext, GrPrevious } from "react-icons/gr";
 import ShareModal from "../components/ui/modal/ShareModal";
@@ -107,29 +108,33 @@ const FlashcardDetails = () => {
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+    >
       <ShareModal show={toggleModal} hide={setToggleModal} flashcard={flashcard} />
       <PrintTemplate pdfRef={pdfRef} flashcard={flashcard} />
 
       <div className="flex items-start gap-5 mb-10">
         <div>
           <Link to="/app/dashboard">
-            <i className="text-xl text-brandAqua">
+            <i className="text-xl text-brandCyan">
               <BsArrowLeft />
             </i>
           </Link>
         </div>
         <div className="flex-1 flex items-start justify-between">
           <div>
-            <h3 className="text-2xl font-semibold leading-none capitalize mb-2">
+            <h3 className="font-display text-3xl md:text-4xl font-bold tracking-tight leading-none capitalize mb-3 text-white">
               {flashcard.name}
             </h3>
-            <p className="text-gray-300">{flashcard.description}</p>
+            <p className="text-gray-400 text-sm">{flashcard.description}</p>
           </div>
           <Link
             to={`/app/dashboard/${id}/edit`}
             title="edit this flashcard set"
-            className="flex items-center gap-2 text-brandAqua font-semibold"
+            className="flex items-center gap-2 text-brandCyan font-semibold text-sm hover:text-white transition-colors"
           >
             <BiEdit /> Edit
           </Link>
@@ -137,11 +142,14 @@ const FlashcardDetails = () => {
       </div>
 
       <div className="xl:flex xl:gap-3 xl:items-start">
-        <div className="bg-brandSurface p-4 rounded-md max-h-96">
-          <h5 className="text-gray-400 border-b-2 border-b-brandBorder font-semibold">
-            Flashcards
-          </h5>
-          <ul className="flex gap-3 mt-4 font-medium text-gray-300 xl:overflow-y-scroll max-h-80 pb-5 overflow-x-scroll xl:flex-col xl:w-52 xl:overflow-x-auto">
+        <div className="bg-brandSurface border border-brandBorder p-4 rounded-xl max-h-96">
+          <div className="flex items-center gap-3 pb-2 border-b border-brandBorder">
+            <span className="font-mono text-xs text-brandCyan">{flashcard.flashcard_terms.length}</span>
+            <h5 className="text-gray-500 text-xs uppercase tracking-[0.2em] font-semibold">
+              Flashcards
+            </h5>
+          </div>
+          <ul className="flex gap-3 mt-4 font-medium text-gray-300 xl:overflow-y-scroll max-h-80 pb-5 overflow-x-scroll snap-x snap-mandatory xl:flex-col xl:w-52 xl:overflow-x-auto xl:snap-none">
             {flashcard.flashcard_terms.map(
               ({ term, definition, image_url }, index) => {
                 const isButtonRef = index === 0 ? buttonRef : null;
@@ -158,16 +166,26 @@ const FlashcardDetails = () => {
                 };
 
                 return (
-                  <li key={index} className="border-b border-brandBorder">
+                  <li key={index} className="relative snap-start border-b border-brandBorder xl:border-b-0">
+                    {isActive && (
+                      <motion.span
+                        layoutId="active-term-highlight"
+                        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 bg-brandCyan/10 rounded-lg"
+                      />
+                    )}
                     <button
                       type="button"
                       ref={isButtonRef}
                       onClick={handleClick}
-                      className={`text-left w-52 bg-gray-800 p-3 rounded-md shadow-sm truncate xl:w-full xl:bg-transparent xl:p-0 xl:pb-1 transition-all ${
-                        isActive ? "xl:text-brandAqua text-brandAqua" : ""
+                      className={`relative flex items-center gap-2 text-left w-52 bg-brandBg p-3 rounded-lg shadow-sm xl:w-full xl:bg-transparent xl:p-2 transition-colors ${
+                        isActive ? "text-brandCyan" : "hover:text-white"
                       }`}
                     >
-                      {term}
+                      <span className="font-mono text-xs text-gray-600 shrink-0">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="truncate">{term}</span>
                     </button>
                   </li>
                 );
@@ -176,29 +194,35 @@ const FlashcardDetails = () => {
           </ul>
         </div>
         <div className="space-y-10 w-full mb-10" id="myId">
-          <Slider
-            key={id}
-            definition={state.definition}
-            image={state.image}
-            term={state.term}
-            termRef={termRef}
-          />
+          <AnimatePresence mode="wait">
+            <Slider
+              key={active}
+              definition={state.definition}
+              image={state.image}
+              term={state.term}
+              termRef={termRef}
+            />
+          </AnimatePresence>
 
-          <div className="flex items-center gap-8 justify-center">
+          <div className="flex items-center gap-4 justify-center">
             <Button
               type={"button"}
               text={<GrPrevious />}
               fn={() => displayData(active - 1)}
-              btnclass={"p-2 rounded-md active:bg-brandAqua/20 hover:bg-gray-800"}
+              btnclass={"p-3 rounded-full border border-brandBorder text-gray-400 hover:border-brandCyan/50 hover:text-white transition-colors"}
             />
-            <span>
-              {state.index + 1}/{state.totalTerms}
+            <span className="font-mono text-sm text-gray-400 tabular-nums px-4 py-2 rounded-full border border-brandBorder">
+              <span className="text-white font-semibold">
+                {String(state.index + 1).padStart(2, "0")}
+              </span>
+              {" / "}
+              {String(state.totalTerms).padStart(2, "0")}
             </span>
             <Button
               type={"button"}
               text={<GrNext />}
               fn={() => displayData(active + 1)}
-              btnclass={"p-2 rounded-md active:bg-brandAqua/20 hover:bg-gray-800"}
+              btnclass={"p-3 rounded-full border border-brandBorder text-gray-400 hover:border-brandCyan/50 hover:text-white transition-colors"}
             />
           </div>
         </div>
@@ -217,7 +241,7 @@ const FlashcardDetails = () => {
                         {btn_text}
                       </>
                     }
-                    btnclass="flex items-center gap-2 bg-brandSurface rounded-md w-full shadow-sm transition-all px-6 py-2 hover:bg-gray-800"
+                    btnclass="flex items-center gap-2 bg-brandSurface border border-brandBorder rounded-lg w-full shadow-sm transition-colors text-sm font-medium px-6 py-2.5 hover:border-brandCyan/50"
                   />
                 </li>
               )
@@ -225,15 +249,15 @@ const FlashcardDetails = () => {
           </ul>
 
           {quizAttempts.length > 0 && (
-            <div className="bg-brandSurface rounded-md shadow-sm mt-3 p-4 xl:w-52">
-              <h5 className="text-gray-400 font-semibold mb-2">
+            <div className="bg-brandSurface border border-brandBorder rounded-lg shadow-sm mt-3 p-4 xl:w-52">
+              <h5 className="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">
                 Quiz History
               </h5>
-              <ul className="flex flex-col gap-1 text-sm text-gray-300">
+              <ul className="flex flex-col gap-1 text-sm text-gray-300 font-mono">
                 {quizAttempts.slice(0, 5).map(({ id: attemptId, score, total, created_at }) => (
                   <li key={attemptId} className="flex justify-between gap-3">
-                    <span>{new Date(created_at).toLocaleDateString()}</span>
-                    <span className="font-semibold">
+                    <span className="font-sans text-gray-500">{new Date(created_at).toLocaleDateString()}</span>
+                    <span className="font-semibold text-brandCyan">
                       {score}/{total}
                     </span>
                   </li>
@@ -243,7 +267,7 @@ const FlashcardDetails = () => {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

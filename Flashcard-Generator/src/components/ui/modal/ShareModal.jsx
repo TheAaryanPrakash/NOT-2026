@@ -15,6 +15,7 @@ import {
 import { VscCopy, VscClose } from "react-icons/vsc";
 import { BiShareAlt } from "react-icons/bi";
 import { MdDone } from "react-icons/md";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "../button/Button";
 import ShareOnSocial from "react-share-on-social";
 import { useSetFlashcardGroupVisibility } from "../../../hooks/useFlashcards";
@@ -72,11 +73,25 @@ const ShareModal = ({ show, hide, flashcard }) => {
   ];
 
   return (
-    <div
-      className={`fixed inset-0 w-full h-screen place-items-center bg-gray-500 bg-opacity-60 backdrop-blur-[1px] ${show}`}
-    >
-      <div className="bg-brandSurface text-white p-10 w-96 rounded-md shadow-md relative">
-        <div className="absolute top-3 right-3 text-2xl text-gray-400 hover:text-brandAqua transition-all">
+    <AnimatePresence>
+      {show === "grid" && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={() => hide("hidden")}
+          className="fixed inset-0 w-full h-screen grid place-items-center bg-black/70 backdrop-blur-sm z-50"
+        >
+      <motion.div
+        onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, y: 16, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 16, scale: 0.95 }}
+        transition={{ type: "spring", stiffness: 320, damping: 26 }}
+        className="bg-brandSurface border border-brandBorder text-white p-10 w-96 rounded-2xl shadow-xl relative"
+      >
+        <div className="absolute top-3 right-3 text-2xl text-gray-500 hover:text-brandCyan transition-colors">
           <Button
             type={"button"}
             text={<VscClose />}
@@ -86,20 +101,21 @@ const ShareModal = ({ show, hide, flashcard }) => {
           />
         </div>
 
-        <h3 className="font-semibold text-brandAqua">Share</h3>
+        <h3 className="font-display font-semibold text-lg text-white">Share</h3>
 
-        <label className="flex items-center gap-2 mt-4 text-gray-300">
+        <label className="flex items-center gap-2 mt-4 text-gray-300 text-sm">
           <input
             type="checkbox"
             checked={flashcard.is_public}
             disabled={isUpdatingVisibility}
             onChange={(e) => setVisibility(e.target.checked)}
+            className="accent-brandCyan"
           />
           Anyone with the link can view this set
         </label>
 
         {!flashcard.is_public && (
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-gray-500 mt-1">
             Turn this on to generate a public, view-only link.
           </p>
         )}
@@ -114,12 +130,12 @@ const ShareModal = ({ show, hide, flashcard }) => {
                   id="page_url"
                   disabled
                   value={shareUrl}
-                  className="border-2 border-gray-700 border-dashed bg-black text-white px-2 py-1 rounded-md w-60 truncate"
+                  className="border border-brandBorder border-dashed bg-brandBg text-gray-300 text-sm px-2 py-1.5 rounded-md w-60 truncate"
                 />
               </div>
 
               <div>
-                <ul className="flex items-center gap-3 text-xl text-gray-400 hover:text-brandAqua transition-all">
+                <ul className="flex items-center gap-3 text-xl text-gray-500 hover:text-brandCyan transition-colors">
                   <li>
                     <button
                       type="button"
@@ -162,8 +178,10 @@ const ShareModal = ({ show, hide, flashcard }) => {
             </ul>
           </>
         )}
-      </div>
-    </div>
+      </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

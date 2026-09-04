@@ -4,12 +4,24 @@ import React from "react";
 import FieldInput from "./ui/input/FieldInput";
 import { Field } from "formik";
 import { AiFillFileImage } from "react-icons/ai";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "./ui/button/Button";
 
 const CreateGroup = ({ values, setFieldValue }) => {
   // This function returns a `div` element that contains the create group and group description form.
   return (
-    <div className="bg-brandSurface shadow-md md:p-10 p-5 rounded-md sm:p-5">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="bg-brandSurface shadow-md md:p-10 p-5 rounded-xl sm:p-5"
+    >
+      <div className="flex items-center gap-3 mb-6 pb-3 border-b border-brandBorder">
+        <span className="font-mono text-xs text-brandCyan">01</span>
+        <span className="font-mono text-xs uppercase tracking-[0.2em] text-gray-500">
+          Details
+        </span>
+      </div>
       {/* This `div` element contains the group name input and the group image
       upload button. */}
       <div
@@ -29,15 +41,15 @@ const CreateGroup = ({ values, setFieldValue }) => {
           <Button
             type={"button"}
             btnclass={
-              "border-2 border-brandBorder text-white rounded-md min-w-max font-semibold text-lg px-6 py-2 hover:border-brandAqua transition-all"
+              "border border-brandBorder text-white rounded-lg min-w-max font-semibold text-sm px-5 py-2.5 hover:border-brandCyan transition-colors"
             }
             text={
               <>
                 <label
                   htmlFor="profile"
-                  className="flex items-center gap-1 cursor-pointer"
+                  className="flex items-center gap-2 cursor-pointer"
                 >
-                  <AiFillFileImage className="text-brandAqua" />
+                  <AiFillFileImage className="text-brandCyan" />
                   {values.groups.Profile ? "Change" : "Upload"} Image
                   <Field
                     type="file"
@@ -58,18 +70,24 @@ const CreateGroup = ({ values, setFieldValue }) => {
             }
           />
         </div>
-        {values.groups.Profile && (
-          <>
-            <div className="flex items-center gap-5">
+        <AnimatePresence>
+          {values.groups.Profile && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 320, damping: 24 }}
+              className="flex items-center gap-5"
+            >
               <img
-                className="w-20 aspect-square rounded-md"
+                className="w-20 aspect-square rounded-lg ring-1 ring-brandBorder"
                 src={values.groups.Profile}
                 alt="card_profile"
                 loading="lazy"
               />
               <Button
                 type="button"
-                btnclass={"font-semibold text-brandAqua mt-5"}
+                btnclass={"font-semibold text-sm text-brandCyan hover:text-white transition-colors mt-5"}
                 fn={() => {
                   setFieldValue("groups.Profile", null);
                   setFieldValue("groups.ProfileFile", null);
@@ -77,15 +95,15 @@ const CreateGroup = ({ values, setFieldValue }) => {
                 text={"- Remove"}
                 list
               />
-            </div>
-          </>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       {/* Group description */}
       <div className="flex flex-col gap-2 relative">
         <label
           htmlFor="groupDescription"
-          className="font-semibold text-gray-300"
+          className="font-medium text-sm text-gray-400"
         >
           Add Description
         </label>
@@ -95,10 +113,10 @@ const CreateGroup = ({ values, setFieldValue }) => {
           id="groupDescription"
           maxLength="500"
           placeholder="Write your description here ( max length is 500 words )"
-          className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md h-36 resize-none focus:outline-none focus:border-brandAqua"
+          className="p-2.5 text-base border border-brandBorder bg-brandBg text-white placeholder-gray-600 rounded-lg h-36 resize-none transition-colors focus:outline-none focus:border-brandCyan focus:ring-1 focus:ring-brandCyan/50"
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

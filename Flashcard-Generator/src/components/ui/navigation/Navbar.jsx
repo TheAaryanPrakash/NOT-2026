@@ -2,6 +2,7 @@
 
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { useAuth } from "../../../context/AuthContext";
 
 const Navbar = ({ Logo }) => {
@@ -14,31 +15,32 @@ const Navbar = ({ Logo }) => {
   };
 
   return (
-    <header>
+    <motion.header
+      initial={{ opacity: 0, y: -16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4 }}
+      className="sticky top-0 z-40 px-3 pt-3 md:px-6 md:pt-6"
+    >
       <nav
-        className="p-2
-        md:px-10
-        lg:px-15
-        xl:px-20
-        bg-black
-        border-b-2 border-brandBorder
-        flex items-center justify-between
+        className="max-w-6xl mx-auto flex items-center justify-between gap-4
+        rounded-full bg-brandSurface/90 backdrop-blur-md border border-brandBorder
+        px-3 py-1.5 md:px-4 shadow-lg
       "
       >
-        <div>
-          <NavLink to={"/app"}>
-            <img className="w-32 " src={Logo} alt="fleshcard-generator" />
-          </NavLink>
-        </div>
-        <button
+        <NavLink to={"/app"} className="block shrink-0">
+          <img className="w-24" src={Logo} alt="flashcard-generator" />
+        </NavLink>
+        <motion.button
           type="button"
           onClick={handleSignOut}
-          className="font-semibold text-gray-400 hover:text-brandAqua transition-all"
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.96 }}
+          className="font-semibold text-sm text-gray-300 hover:text-white transition-colors rounded-full px-4 py-2 border border-brandBorder hover:border-brandCyan/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-brandCyan/50"
         >
           Sign Out
-        </button>
+        </motion.button>
       </nav>
-    </header>
+    </motion.header>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import AuthLayout from "../../layouts/containers/AuthLayout";
 import FieldInput from "../../components/ui/input/FieldInput";
 import Button from "../../components/ui/button/Button";
@@ -37,37 +38,68 @@ const Login = () => {
       >
         {({ isSubmitting, isValid, dirty }) => (
           <Form className="flex flex-col gap-6" autoComplete="off">
-            {formError && (
-              <p className="text-red-400 font-semibold text-sm">{formError}</p>
-            )}
+            <AnimatePresence>
+              {formError && (
+                <motion.p
+                  key="form-error"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0, x: [0, -8, 8, -6, 6, 0] }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-brandRed font-semibold text-sm"
+                >
+                  {formError}
+                </motion.p>
+              )}
+            </AnimatePresence>
 
-            <FieldInput
-              type="email"
-              name="email"
-              id="email"
-              htmlFor="email"
-              label="Email"
-              placeholder="you@example.com"
-            />
-            <FieldInput
-              type="password"
-              name="password"
-              id="password"
-              htmlFor="password"
-              label="Password"
-              placeholder="••••••••"
-            />
+            <div className="flex flex-col gap-6">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+              >
+                <FieldInput
+                  type="email"
+                  name="email"
+                  id="email"
+                  htmlFor="email"
+                  label="Email"
+                  placeholder="you@example.com"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.23 }}
+              >
+                <FieldInput
+                  type="password"
+                  name="password"
+                  id="password"
+                  htmlFor="password"
+                  label="Password"
+                  placeholder="••••••••"
+                />
+              </motion.div>
 
-            <Button
-              type="submit"
-              disabled={!(isValid && dirty) || isSubmitting}
-              text={isSubmitting ? "Signing In..." : "Sign In."}
-              btnclass={`font-semibold rounded-md text-white text-lg px-6 py-3 mt-2 transition-all ${
-                !isValid
-                  ? "bg-gray-800 text-gray-500"
-                  : "bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500"
-              }`}
-            />
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.31 }}
+              >
+                <Button
+                  type="submit"
+                  disabled={!(isValid && dirty) || isSubmitting}
+                  text={isSubmitting ? "Signing In..." : "Sign In."}
+                  btnclass={`w-full font-semibold rounded-xl text-base px-6 py-3 mt-2 transition-colors ${
+                    !(isValid && dirty)
+                      ? "bg-brandBorder text-gray-500"
+                      : "bg-brandCyan text-black hover:bg-white shadow-glow"
+                  }`}
+                />
+              </motion.div>
+            </div>
           </Form>
         )}
       </Formik>

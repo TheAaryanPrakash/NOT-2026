@@ -1,17 +1,20 @@
 import React from "react";
+import { motion } from "framer-motion";
 
-const Button = ({ text, btnclass, fn, type, disabled, title, ref }) => {
+const Button = ({ text, btnclass, fn, type, disabled, title }) => {
   return (
-    <button
+    <motion.button
       onClick={fn}
       type={type}
       title={title}
-      ref={ref}
       disabled={disabled}
       className={btnclass}
+      whileHover={!disabled ? { scale: 1.04 } : undefined}
+      whileTap={!disabled ? { scale: 0.94 } : undefined}
+      transition={{ type: "spring", stiffness: 400, damping: 20 }}
     >
       {text}
-    </button>
+    </motion.button>
   );
 };
 

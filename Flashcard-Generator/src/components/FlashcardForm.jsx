@@ -3,6 +3,7 @@ import CreateGroup from "./CreateGroup";
 import CreateTerm from "./CreateTerm";
 import AiGenerator from "./AiGenerator";
 import { Formik, Form } from "formik";
+import { AnimatePresence, motion } from "framer-motion";
 import Button from "./ui/button/Button";
 import { flashcardSchema } from "../schema/validation";
 import Toast from "./ui/toast/Toast";
@@ -46,16 +47,24 @@ const FlashcardForm = ({
       {({ values, isValid, setFieldValue, isSubmitting, dirty }) => (
         <Form autoComplete="false">
           <section className="mb-10 flex flex-col gap-10">
-            {toast && (
-              <Toast
-                fn={() => setToast(false)}
-                toastClass={!toast ? "-translate-y-96" : "translate-y-0"}
-              />
-            )}
+            <AnimatePresence>
+              {toast && <Toast fn={() => setToast(false)} />}
+            </AnimatePresence>
 
-            {formError && (
-              <p className="text-red-400 font-semibold">{formError}</p>
-            )}
+            <AnimatePresence>
+              {formError && (
+                <motion.p
+                  key="form-error"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0, x: [0, -8, 8, -6, 6, 0] }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-brandRed font-semibold text-sm"
+                >
+                  {formError}
+                </motion.p>
+              )}
+            </AnimatePresence>
 
             {enableAiGenerate && (
               <AiGenerator setFieldValue={setFieldValue} />
@@ -70,10 +79,10 @@ const FlashcardForm = ({
               data-testid="submit-form"
               disabled={!(isValid && dirty) || isSubmitting}
               type="submit"
-              btnclass={`font-semibold rounded-md text-white text-xl px-14 py-4 transition-all ${
-                !isValid
-                  ? "bg-gray-800 text-gray-500"
-                  : "bg-gradient-to-br from-red-600 to-pink-600 hover:from-red-500 hover:to-pink-500"
+              btnclass={`font-semibold rounded-xl text-lg px-14 py-4 transition-colors ${
+                !(isValid && dirty)
+                  ? "bg-brandBorder text-gray-500"
+                  : "bg-brandCyan text-black hover:bg-white shadow-glow"
               }`}
               text={isSubmitting ? "Saving..." : submitLabel}
             />

@@ -6,7 +6,7 @@ import React from "react";
 const FieldInput = ({ label, id, name, htmlFor, placeholder, type = "text" }) => {
   return (
     <div className="flex flex-col gap-2 md:w-80 w-full">
-      <label htmlFor={htmlFor} className="font-semibold text-gray-300">
+      <label htmlFor={htmlFor} className="font-medium text-sm text-gray-400">
         {label}*
       </label>
       <div className="flex flex-col gap-2 md:w-80 w-full relative">
@@ -15,7 +15,7 @@ const FieldInput = ({ label, id, name, htmlFor, placeholder, type = "text" }) =>
           id={id}
           name={name}
           placeholder={placeholder}
-          className="p-2 text-lg border-2 border-brandBorder bg-black text-white placeholder-gray-500 rounded-md focus:outline-none focus:border-brandAqua"
+          className="p-2.5 text-base border border-brandBorder bg-brandBg text-white placeholder-gray-600 rounded-lg transition-colors focus:outline-none focus:border-brandCyan focus:ring-1 focus:ring-brandCyan/50"
           required
           autoComplete="false"
         />
@@ -23,7 +23,7 @@ const FieldInput = ({ label, id, name, htmlFor, placeholder, type = "text" }) =>
           name={name}
           component="span"
           data-testid="error-msg"
-          className="absolute top-12 left-0 text-red-400"
+          className="absolute top-12 left-0 text-red-400 text-sm"
         />
       </div>
     </div>

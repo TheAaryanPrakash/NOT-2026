@@ -1,9 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: "Inria Sans", sans-serif;
+  font-family: "Inter", sans-serif;
+  background-color: #050708;
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background-color: rgba(34, 229, 238, 0.3);
+  color: #ffffff;
+}
+
+* {
+  scroll-behavior: smooth;
 }

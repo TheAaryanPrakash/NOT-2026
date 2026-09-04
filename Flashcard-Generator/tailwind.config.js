@@ -4,13 +4,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brandBg: "#000000",
-        brandSurface: "#1a1a1a",
-        brandBorder: "#333333",
-        brandAqua: "#00ffbf",
+        brandBg: "#050708",
+        brandSurface: "#0e1215",
+        brandSurfaceHover: "#151b1f",
+        brandBorder: "#1f2529",
+        brandAqua: "#22e5ee",
+        brandCyan: "#22e5ee",
+        brandCyanDim: "#0b8f99",
+        brandRed: "#f2394a",
+        brandRedDim: "#7f1722",
       },
       fontFamily: {
-        sans: ['"Inria Sans"', "sans-serif"],
+        sans: ['"Inter"', "sans-serif"],
+        display: ['"Space Grotesk"', "sans-serif"],
+        mono: ['"JetBrains Mono"', "monospace"],
+      },
+      boxShadow: {
+        glow: "0 0 40px -5px rgba(34, 229, 238, 0.25)",
+        glowRed: "0 0 40px -5px rgba(242, 57, 74, 0.3)",
       },
     },
   },
