@@ -39,7 +39,7 @@ const NotFound = () => {
         transition={{ duration: 0.4, delay: 0.15 }}
         className="relative font-display text-3xl sm:text-4xl text-white"
       >
-        Page Not Found
+        🌙 Page Not Found
       </motion.h3>
       <motion.div
         initial={{ opacity: 0, y: 12 }}

@@ -3,13 +3,21 @@
 import { ErrorMessage, Field } from "formik";
 import React from "react";
 
-const FieldInput = ({ label, id, name, htmlFor, placeholder, type = "text" }) => {
+const FieldInput = ({
+  label,
+  id,
+  name,
+  htmlFor,
+  placeholder,
+  type = "text",
+  widthClassName = "md:w-80 w-full",
+}) => {
   return (
-    <div className="flex flex-col gap-2 md:w-80 w-full">
+    <div className={`flex flex-col gap-2 ${widthClassName}`}>
       <label htmlFor={htmlFor} className="font-medium text-sm text-gray-400">
         {label}*
       </label>
-      <div className="flex flex-col gap-2 md:w-80 w-full relative">
+      <div className={`flex flex-col gap-2 relative ${widthClassName}`}>
         <Field
           type={type}
           id={id}

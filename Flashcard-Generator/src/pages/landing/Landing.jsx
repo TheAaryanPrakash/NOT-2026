@@ -1,8 +1,12 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useAuth } from "../../context/AuthContext";
 import Logo from "../../assets/logo.png";
+
+// Three.js/R3F are only needed on this page — code-split so /app, /login,
+// etc. never download the 3D renderer.
+const ScrollMoon = lazy(() => import("../../components/landing/ScrollMoon"));
 
 const Landing = () => {
   const { user } = useAuth();
@@ -10,6 +14,10 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-brandBg text-white font-sans overflow-x-hidden">
+      <Suspense fallback={null}>
+        <ScrollMoon />
+      </Suspense>
+
       {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: -16 }}
@@ -94,7 +102,7 @@ const Landing = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-mono text-xs sm:text-sm tracking-[0.3em] text-brandCyan uppercase mb-6"
           >
-            Notes on Time
+            🌙 Notes on Time
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}

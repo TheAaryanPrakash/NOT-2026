@@ -101,6 +101,7 @@ const Signup = () => {
                         htmlFor="name"
                         label="Name"
                         placeholder="Jane Doe"
+                        widthClassName="w-full"
                       />
                     </motion.div>
                     <motion.div
@@ -115,6 +116,7 @@ const Signup = () => {
                         htmlFor="email"
                         label="Email"
                         placeholder="you@example.com"
+                        widthClassName="w-full"
                       />
                     </motion.div>
                     <motion.div
@@ -129,6 +131,7 @@ const Signup = () => {
                         htmlFor="password"
                         label="Password"
                         placeholder="At least 6 characters"
+                        widthClassName="w-full"
                       />
                     </motion.div>
                     <motion.div
@@ -143,6 +146,7 @@ const Signup = () => {
                         htmlFor="confirmPassword"
                         label="Repeat Password"
                         placeholder="••••••••"
+                        widthClassName="w-full"
                       />
                     </motion.div>
 

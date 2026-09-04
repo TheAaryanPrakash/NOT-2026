@@ -92,7 +92,7 @@ const AiGenerator = ({ setFieldValue }) => {
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
       <h3 className="relative font-display font-semibold text-lg mb-3 text-brandCyan flex items-center gap-2">
-        <span className="w-1.5 h-1.5 rounded-full bg-brandCyan animate-pulse" />
+        <span className="text-sm animate-pulse" aria-hidden="true">🌙</span>
         Generate with AI
       </h3>
       <p className="text-gray-400 mb-4 text-sm">

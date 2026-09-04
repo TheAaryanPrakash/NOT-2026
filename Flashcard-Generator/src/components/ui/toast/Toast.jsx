@@ -17,7 +17,7 @@ const Toast = ({ fn }) => {
           <i className="text-2xl text-brandCyan">
             <BsCheckCircle />
           </i>
-          Your Flashcard is created.
+          Your Flashcard is created. 🌙
         </h3>
         <p className="text-gray-400 text-sm">
           Go to My Flashcard tab and check your all of your created flashcards.

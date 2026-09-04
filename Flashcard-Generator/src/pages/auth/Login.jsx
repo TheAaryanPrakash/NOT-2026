@@ -66,6 +66,7 @@ const Login = () => {
                   htmlFor="email"
                   label="Email"
                   placeholder="you@example.com"
+                  widthClassName="w-full"
                 />
               </motion.div>
               <motion.div
@@ -80,6 +81,7 @@ const Login = () => {
                   htmlFor="password"
                   label="Password"
                   placeholder="••••••••"
+                  widthClassName="w-full"
                 />
               </motion.div>
 

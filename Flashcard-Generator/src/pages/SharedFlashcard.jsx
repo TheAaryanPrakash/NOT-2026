@@ -79,7 +79,7 @@ const SharedFlashcard = () => {
 
         <div className="text-center mt-10">
           <Link to="/signup" className="text-brandCyan font-semibold hover:text-white transition-colors">
-            Create your own flashcards with NOT.
+            🌙 Create your own flashcards with NOT.
           </Link>
         </div>
       </div>

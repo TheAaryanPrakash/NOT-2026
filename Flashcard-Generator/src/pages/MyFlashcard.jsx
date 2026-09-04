@@ -79,7 +79,7 @@ const MyFlashcard = () => {
             transition={{ duration: 0.4 }}
             className="flex flex-col items-center justify-center gap-4 text-center mx-auto py-16"
           >
-            <p className="text-white text-xl font-display">You don't have any flashcards</p>
+            <p className="text-white text-xl font-display">🌙 You don't have any flashcards</p>
             <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.95 }}>
               <NavLink
                 role="link"
