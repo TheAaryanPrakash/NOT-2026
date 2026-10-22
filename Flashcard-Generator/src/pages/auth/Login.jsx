@@ -8,10 +8,28 @@ import Button from "../../components/ui/button/Button";
 import { loginSchema } from "../../schema/authSchema";
 import { useAuth } from "../../context/AuthContext";
 
+const DEMO_EMAIL = "aaryan.sprakash@gmail.com";
+const DEMO_PASSWORD = "Test-123";
+
 const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const [formError, setFormError] = useState("");
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  const handleDemoLogin = async () => {
+    setFormError("");
+    setDemoLoading(true);
+    const { error } = await signIn(DEMO_EMAIL, DEMO_PASSWORD);
+    setDemoLoading(false);
+
+    if (error) {
+      setFormError(error.message);
+      return;
+    }
+
+    navigate("/app", { replace: true });
+  };
 
   return (
     <AuthLayout
@@ -105,6 +123,20 @@ const Login = () => {
           </Form>
         )}
       </Formik>
+
+      <div className="flex items-center gap-3 my-6">
+        <div className="h-px flex-1 bg-brandBorder" />
+        <span className="text-xs text-gray-500 uppercase tracking-wide">or</span>
+        <div className="h-px flex-1 bg-brandBorder" />
+      </div>
+
+      <Button
+        type="button"
+        fn={handleDemoLogin}
+        disabled={demoLoading}
+        text={demoLoading ? "Loading Demo..." : "View Demo"}
+        btnclass="w-full font-semibold rounded-xl text-base px-6 py-3 border border-brandCyan text-brandCyan hover:bg-brandCyan hover:text-black transition-colors disabled:opacity-60"
+      />
     </AuthLayout>
   );
 };
